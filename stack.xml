@@ -1,0 +1,24 @@
+<stack>
+  <name>console_bridge</name>
+  <version>0.1.0</version>
+  <description brief="Console Bridge">
+    Lightweight tool for forwarding output from libraries to other
+    logging systems.
+  </description>
+  <author email="lunaryan@gmail.com">Ryan Luna</author>
+  <author email="isucan@willowgarage.com">Ioan Sucan</author>
+  <maintainer email="isucan@willowgarage.com">Ioan Sucan</maintainer>
+
+  <license>BSD</license>  
+  <copyright>Willow Garage</copyright>
+  <url>https://kforge.ros.org/projects/console_bridge/</url>
+  
+  <review status="unreviewed" notes=""/>
+
+  <build_depends>catkin</build_depends>
+  <build_depends>cmake</build_depends>
+  <build_depends>boost</build_depends>
+  
+  <depends>boost</depends> 
+
+</stack>
