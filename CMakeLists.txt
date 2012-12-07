@@ -7,6 +7,13 @@ endif()
 
 find_package(Boost COMPONENTS thread REQUIRED)
 
+find_package(catkin REQUIRED)
+catkin_package(
+  INCLUDE_DIRS include
+  LIBRARIES ${PROJECT_NAME}
+  DEPENDS Boost COMPONENTS thread
+)
+
 if(MSVC OR MSVC90 OR MSVC10)
   set(MSVC ON)
 endif (MSVC OR MSVC90 OR MSVC10)
@@ -32,8 +39,8 @@ install(DIRECTORY include/
 set(PKG_NAME ${PROJECT_NAME})
 set(PKG_LIBRARIES ${PROJECT_NAME})
 set(cmake_conf_file "${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}-config.cmake")
-configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
-install(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME}/cmake/ COMPONENT cmake)
+#configure_file("${cmake_conf_file}.in" "${cmake_conf_file}" @ONLY)
+#install(FILES ${cmake_conf_file} DESTINATION share/${PROJECT_NAME}/cmake/ COMPONENT cmake)
 
 if (NOT MSVC)
   set(PKG_DESC "Console Bridge")
