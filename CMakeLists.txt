@@ -1,40 +1,44 @@
 cmake_minimum_required(VERSION 2.8)
 project(console_bridge)
 
-if (NOT CMAKE_BUILD_TYPE)
+if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
-find_package(Boost COMPONENTS thread REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system thread)
 
 find_package(catkin REQUIRED)
+
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
-  DEPENDS Boost COMPONENTS thread
+  DEPENDS Boost
 )
 
 if(MSVC OR MSVC90 OR MSVC10)
   set(MSVC ON)
-endif (MSVC OR MSVC90 OR MSVC10)
+endif()
 
 if(MSVC)
   add_definitions(-DBOOST_ALL_NO_LIB)
-endif(MSVC)
+endif()
 
+include_directories(SYSTEM ${Boost_INCLUDE_DIR})
 include_directories(include)
-include_directories(${Boost_INCLUDE_DIR})
+
 link_directories(${Boost_LIBRARY_DIRS})
 
 add_library(${PROJECT_NAME} SHARED src/console.cpp)
-target_link_libraries(${PROJECT_NAME} ${Boost_THREAD_LIBRARY})
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
 
 install(TARGETS ${PROJECT_NAME}
-  DESTINATION lib/)
+  DESTINATION lib/
+)
 
 install(DIRECTORY include/
   DESTINATION include
-  FILES_MATCHING PATTERN "*.h")
+  FILES_MATCHING PATTERN "*.h"
+)
 
 set(PKG_NAME ${PROJECT_NAME})
 set(PKG_LIBRARIES ${PROJECT_NAME})
